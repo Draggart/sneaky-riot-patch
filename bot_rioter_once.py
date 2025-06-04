@@ -4,7 +4,7 @@ import requests
 import os
 
 RIOTER_USERNAME = "RiotPhroxzon"
-DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1379947155497947246/RysJfkp61_SnP_BPAFKNfR4Hcn8lDFv9pBEHNEJx-tCGM4b2lzjKa8wJNahHb2CnYAn5"
+DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1379947155497947246/RysJfkp61_SnP_BPAFKNfR4b2lzjKa8wJNahHb2CnYAn5"
 KEYWORDS = ["patch", "preview"]
 LAST_TWEET_FILE = "last_tweet.txt"
 
@@ -60,3 +60,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
