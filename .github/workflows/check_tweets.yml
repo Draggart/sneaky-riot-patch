@@ -3,26 +3,24 @@ name: Check RiotPhroxzon Tweets
 on:
   workflow_dispatch:
   schedule:
-    - cron: "*/30 7-9 * * *"
+    - cron: "0 7 * * *"  # todos los días a las 7 AM UTC
 
 jobs:
-  check-tweets:
+  check_tweets:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
 
-      # No usar download-artifact para evitar error
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.x'
+          python-version: "3.10"
 
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
           pip install snscrape requests
 
-      - name: Run bot once
+      - name: Run script
         run: python bot.py
-
