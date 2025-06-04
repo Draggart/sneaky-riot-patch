@@ -1,0 +1,40 @@
+name: Check RiotPhroxzon Tweets
+
+on:
+  workflow_dispatch:      # Para ejecución manual con botón Run workflow
+  schedule:
+    - cron: "*/30 7-9 * * *"  # Cada 30 min entre 7 y 9 AM UTC (ajusta si quieres)
+
+jobs:
+  check-tweets:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+
+    - name: Download last_tweet artifact if exists
+      uses: actions/download-artifact@v2
+      with:
+        name: last_tweet_data
+        path: ./
+      continue-on-error: true  # Continúa si no hay artifact (primera ejecución)
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install snscrape requests
+
+    - name: Run bot once
+      run: python bot_rioter_once.py
+
+    - name: Upload last_tweet.txt artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: last_tweet_data
+        path: last_tweet.txt
